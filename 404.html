@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tanı Beni · Canlı düello daveti</title>
+<meta property="og:title" content="Tanı Beni: canlı düello daveti">
+<meta property="og:description" content="Aynı 10 soru, aynı anda. Dokun ve katıl!">
+<style>
+body{font-family:system-ui,sans-serif;background:#0e1118;color:#f2f4f8;margin:0;padding:40px 16px;text-align:center;line-height:1.5}
+main{max-width:420px;margin:0 auto}
+.code{font-size:44px;font-weight:900;letter-spacing:10px;color:#ffc94d;margin:8px 0 20px}
+a.btn{display:block;padding:16px;border-radius:14px;font-weight:800;text-decoration:none;margin:12px 0}
+.primary{background:#e09a00;color:#fff}.secondary{background:#1b2130;color:#4da3ff}
+small{color:#9aa3b2}
+</style>
+</head>
+<body>
+<main>
+<h1>Canlı düello daveti</h1>
+<p id="lead">Arkadaşın seni Tanı Beni'de canlı düelloya çağırıyor: aynı 10 soru, aynı anda.</p>
+<div class="code" id="code"></div>
+<a class="btn primary" id="open" href="#">Uygulamada aç ve katıl</a>
+<a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.berkaykaplanoglu.autospot">Google Play'den indir</a>
+<p><small>Uygulamayı yükledikten sonra Düello → Canlı Düello → Katıl'a bu kodu yaz.</small></p>
+</main>
+<script>
+// Yalnizca /d/KOD bicimi; kod alfabesi uygulamadakiyle ayni (LiveCode.ALPHABET).
+var m = location.pathname.toUpperCase().match(/\/D\/([2-9A-HJ-NP-Z]{5})\/?$/);
+if (m) {
+  var code = m[1];
+  document.getElementById('code').textContent = code;
+  var play = 'https://play.google.com/store/apps/details?id=com.berkaykaplanoglu.autospot';
+  document.getElementById('open').href = 'intent://d/' + code +
+    '#Intent;scheme=tanibeni;package=com.berkaykaplanoglu.autospot;S.browser_fallback_url=' + encodeURIComponent(play) + ';end';
+} else {
+  document.getElementById('lead').textContent = 'Bu sayfa bulunamadı.';
+  document.getElementById('open').href = '/';
+  document.getElementById('open').textContent = 'Ana sayfa';
+}
+</script>
+</body>
+</html>
